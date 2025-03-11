@@ -3,16 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expose Your Passion - Asistente Virtual</title>
+    <title>ExPa - Expose Your Passion</title>
+    <!-- Google Fonts para aproximar las tipografías de marca -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
-        /* Variables y reset */
+        /* Variables y reset - Usando los colores exactos de tu manual de marca */
         :root {
-            --primary-color: #4a6fa5;
-            --secondary-color: #166088;
-            --accent-color: #4baa67;
-            --light-color: #f5f5f5;
-            --dark-color: #333;
-            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --azul-petroleo: #00535b;
+            --sea-green: #00DBCD;
+            --blanco: #FFFFFF;
+            --negro: #222222;
+            --font-titulos: 'Playfair Display', serif; /* Aproximación a The New Elegance */
+            --font-parrafos: 'Montserrat', sans-serif; /* Aproximación a Aloevera Display */
         }
         
         * {
@@ -22,22 +26,50 @@
         }
         
         body {
-            font-family: var(--font-main);
+            font-family: var(--font-parrafos);
             line-height: 1.6;
-            color: var(--dark-color);
-            background-color: var(--light-color);
+            color: var(--negro);
+            background-color: var(--blanco);
         }
         
-        /* Estilos de la página */
+        /* Estilos del encabezado con el logo */
         header {
-            background-color: var(--primary-color);
-            color: white;
-            text-align: center;
+            background-color: var(--azul-petroleo);
+            color: var(--blanco);
             padding: 2rem 1rem;
+            text-align: center;
         }
         
+        .logo-container {
+            margin-bottom: 1rem;
+        }
+        
+        .logo-text {
+            font-size: 4rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .logo-text .ex {
+            color: var(--sea-green);
+            font-weight: bold;
+        }
+        
+        .logo-text .pa {
+            color: var(--blanco);
+            font-weight: bold;
+        }
+        
+        .tagline {
+            font-family: var(--font-titulos);
+            font-style: italic;
+            font-size: 1.8rem;
+            color: var(--sea-green);
+            margin-bottom: 1rem;
+        }
+        
+        /* Estilos de la navegación */
         nav {
-            background-color: var(--secondary-color);
+            background-color: #004550; /* Un poco más oscuro que el azul petróleo */
             padding: 1rem;
         }
         
@@ -52,15 +84,17 @@
         }
         
         nav ul li a {
-            color: white;
+            color: var(--blanco);
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 500;
+            transition: color 0.3s;
         }
         
         nav ul li a:hover {
-            text-decoration: underline;
+            color: var(--sea-green);
         }
         
+        /* Estilos del contenido principal */
         main {
             max-width: 1200px;
             margin: 2rem auto;
@@ -70,18 +104,24 @@
         .hero {
             text-align: center;
             margin-bottom: 3rem;
+            padding: 3rem 1rem;
+            background-color: #f9f9f9;
+            border-radius: 8px;
         }
         
         .hero h2 {
+            font-family: var(--font-titulos);
+            font-style: italic;
             font-size: 2.5rem;
             margin-bottom: 1rem;
-            color: var(--secondary-color);
+            color: var(--azul-petroleo);
         }
         
         .hero p {
             font-size: 1.2rem;
             max-width: 800px;
             margin: 0 auto;
+            font-weight: 300;
         }
         
         .features {
@@ -92,34 +132,45 @@
         }
         
         .feature {
-            background-color: white;
+            background-color: var(--blanco);
             padding: 2rem;
-            border-radius: 5px;
+            border-radius: 8px;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
             text-align: center;
+            transition: transform 0.3s;
+            border-top: 5px solid var(--sea-green);
+        }
+        
+        .feature:hover {
+            transform: translateY(-5px);
         }
         
         .feature h3 {
-            color: var(--secondary-color);
+            color: var(--azul-petroleo);
             margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .feature p {
+            font-weight: 300;
         }
         
         footer {
-            background-color: var(--secondary-color);
-            color: white;
+            background-color: var(--azul-petroleo);
+            color: var(--blanco);
             text-align: center;
             padding: 2rem;
             margin-top: 2rem;
         }
         
-        /* Estilos del chatbot */
+        /* Estilos del chatbot - Actualizado con colores de marca */
         .chat-container {
             position: fixed;
             bottom: 20px;
             right: 20px;
             width: 350px;
             height: 500px;
-            background-color: white;
+            background-color: var(--blanco);
             border-radius: 10px;
             box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
             display: flex;
@@ -134,8 +185,8 @@
         }
         
         .chat-header {
-            background-color: var(--primary-color);
-            color: white;
+            background-color: var(--azul-petroleo);
+            color: var(--blanco);
             padding: 15px;
             border-top-left-radius: 10px;
             border-top-right-radius: 10px;
@@ -180,15 +231,18 @@
             border: 1px solid #ddd;
             border-radius: 5px;
             margin-right: 10px;
+            font-family: var(--font-parrafos);
         }
         
         #send-button {
-            background-color: var(--accent-color);
-            color: white;
+            background-color: var(--sea-green);
+            color: var(--blanco);
             border: none;
             padding: 10px 15px;
             border-radius: 5px;
             cursor: pointer;
+            font-family: var(--font-parrafos);
+            font-weight: 500;
         }
         
         /* Responsive */
@@ -212,8 +266,12 @@
 </head>
 <body>
     <header>
-        <h1>Expose Your Passion</h1>
-        <p>Muestra tu pasión al mundo</p>
+        <div class="logo-container">
+            <div class="logo-text">
+                <span class="ex">ex</span><span class="pa">pa</span>
+            </div>
+            <div class="tagline">expose your passion</div>
+        </div>
     </header>
     
     <nav>
@@ -227,7 +285,7 @@
     
     <main>
         <section class="hero">
-            <h2>Bienvenido a Expose Your Passion</h2>
+            <h2>Bienvenido a ExPa</h2>
             <p>Un espacio dedicado a ayudarte a compartir tu pasión con el mundo. Nuestro objetivo es brindarte las herramientas y la plataforma para que puedas expresar lo que realmente te apasiona.</p>
         </section>
         
@@ -248,7 +306,7 @@
     </main>
     
     <footer>
-        <p>&copy; 2025 Expose Your Passion. Todos los derechos reservados.</p>
+        <p>&copy; 2025 ExPa - Expose Your Passion. Todos los derechos reservados.</p>
     </footer>
     
     <!-- Chatbot / Agente Virtual -->
@@ -259,7 +317,7 @@
         </div>
         <div class="chat-messages" id="chat-messages">
             <div class="message agent-message">
-                ¡Hola! Soy el asistente virtual de Expose Your Passion. ¿En qué puedo ayudarte hoy?
+                ¡Hola! Soy el asistente virtual de ExPa. ¿En qué puedo ayudarte hoy?
             </div>
         </div>
         <div class="chat-input-container">
@@ -281,8 +339,8 @@
             // Base de conocimientos del agente
             const knowledgeBase = {
                 'hola': '¡Hola! ¿En qué puedo ayudarte hoy?',
-                'quién eres': 'Soy el asistente virtual de Expose Your Passion, estoy aquí para responder tus preguntas y ayudarte a descubrir cómo podemos ayudarte a mostrar tu pasión al mundo.',
-                'passion': 'En Expose Your Passion creemos que todos tienen algo que les apasiona y merece ser compartido con el mundo. Nuestro objetivo es ayudarte a expresar esa pasión de la mejor manera posible.',
+                'quién eres': 'Soy el asistente virtual de ExPa, estoy aquí para responder tus preguntas y ayudarte a descubrir cómo podemos ayudarte a mostrar tu pasión al mundo.',
+                'passion': 'En ExPa creemos que todos tienen algo que les apasiona y merece ser compartido con el mundo. Nuestro objetivo es ayudarte a expresar esa pasión de la mejor manera posible.',
                 'servicios': 'Ofrecemos servicios de diseño web, estrategia de contenido, desarrollo de marca y presencia digital. ¿Te gustaría saber más sobre alguno en particular?',
                 'contacto': 'Puedes contactarnos a través del formulario en la sección de Contacto o enviando un correo directamente a info@exposeyourpassion.com.',
                 'horario': 'Estamos disponibles para atenderte de lunes a viernes de 9:00 a 18:00 horas.',
@@ -365,11 +423,11 @@
                     lowerMessage.includes('dónde') || 
                     lowerMessage.includes('cuándo') || 
                     lowerMessage.includes('por qué')) {
-                    return 'Buena pregunta. En Expose Your Passion nos especializamos en ayudar a personas como tú a mostrar su pasión al mundo. Para obtener información más detallada sobre eso, te recomendaría que nos contactes directamente o explores las secciones relevantes de nuestro sitio web.';
+                    return 'Buena pregunta. En ExPa nos especializamos en ayudar a personas como tú a mostrar su pasión al mundo. Para obtener información más detallada sobre eso, te recomendaría que nos contactes directamente o explores las secciones relevantes de nuestro sitio web.';
                 }
                 
                 // Respuesta por defecto
-                return 'Gracias por tu mensaje. En Expose Your Passion estamos comprometidos a ayudarte a compartir tu pasión con el mundo. Si tienes alguna pregunta específica sobre nuestros servicios o necesitas más información, no dudes en preguntar.';
+                return 'Gracias por tu mensaje. En ExPa estamos comprometidos a ayudarte a compartir tu pasión con el mundo. Si tienes alguna pregunta específica sobre nuestros servicios o necesitas más información, no dudes en preguntar.';
             }
             
             // Mostrar mensaje de bienvenida después de un breve retraso
