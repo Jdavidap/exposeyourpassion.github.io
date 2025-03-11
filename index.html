@@ -41,22 +41,13 @@
         }
         
         .logo-container {
-            margin-bottom: 1rem;
+            text-align: center;
+            padding: 1rem 0;
         }
         
-        .logo-text {
-            font-size: 5rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .logo-text .ex {
-            color: var(--sea-green);
-            font-weight: bold;
-        }
-        
-        .logo-text .pa {
-            color: var(--blanco);
-            font-weight: bold;
+        .logo {
+            max-width: 300px;
+            height: auto;
         }
         
         .tagline {
@@ -64,7 +55,7 @@
             font-style: italic;
             font-size: 1.8rem;
             color: var(--sea-green);
-            margin-bottom: 1rem;
+            margin-top: 0.5rem;
         }
         
         /* Estilos de la navegación */
@@ -267,10 +258,8 @@
 <body>
     <header>
         <div class="logo-container">
-            <div class="logo-text">
-                <span class="ex">Ex</span><span class="pa">Pa</span>
-            </div>
-            <div class="tagline">Expose Your Passion</div>
+            <img src="Images/logo.png" alt="ExPa - Expose Your Passion" class="logo">
+            <div class="tagline">expose your passion</div>
         </div>
     </header>
     
@@ -316,127 +305,4 @@
             <span id="toggle-icon">▲</span>
         </div>
         <div class="chat-messages" id="chat-messages">
-            <div class="message agent-message">
-                ¡Hola! Soy el asistente virtual de ExPa. ¿En qué puedo ayudarte hoy?
-            </div>
-        </div>
-        <div class="chat-input-container">
-            <input type="text" id="chat-input" placeholder="Escribe tu mensaje aquí...">
-            <button id="send-button">Enviar</button>
-        </div>
-    </div>
-    
-    <script>
-        // Configuración del chatbot
-        document.addEventListener('DOMContentLoaded', function() {
-            const chatContainer = document.getElementById('chat-container');
-            const chatHeader = document.getElementById('chat-header');
-            const toggleIcon = document.getElementById('toggle-icon');
-            const chatMessages = document.getElementById('chat-messages');
-            const chatInput = document.getElementById('chat-input');
-            const sendButton = document.getElementById('send-button');
-            
-            // Base de conocimientos del agente
-            const knowledgeBase = {
-                'hola': '¡Hola! ¿En qué puedo ayudarte hoy?',
-                'quién eres': 'Soy el asistente virtual de ExPa, estoy aquí para responder tus preguntas y ayudarte a descubrir cómo podemos ayudarte a mostrar tu pasión al mundo.',
-                'passion': 'En ExPa creemos que todos tienen algo que les apasiona y merece ser compartido con el mundo. Nuestro objetivo es ayudarte a expresar esa pasión de la mejor manera posible.',
-                'servicios': 'Ofrecemos servicios de diseño web, estrategia de contenido, desarrollo de marca y presencia digital. ¿Te gustaría saber más sobre alguno en particular?',
-                'contacto': 'Puedes contactarnos a través del formulario en la sección de Contacto o enviando un correo directamente a info@exposeyourpassion.com.',
-                'horario': 'Estamos disponibles para atenderte de lunes a viernes de 9:00 a 18:00 horas.',
-                'precios': 'Nuestros precios varían según el proyecto y tus necesidades específicas. Contáctanos para obtener un presupuesto personalizado.',
-                'ayuda': 'Estoy aquí para ayudarte. Por favor, cuéntame más sobre tu pasión y cómo te gustaría compartirla con el mundo.'
-            };
-            
-            // Función para expandir/colapsar el chat
-            chatHeader.addEventListener('click', function() {
-                chatContainer.classList.toggle('expanded');
-                toggleIcon.textContent = chatContainer.classList.contains('expanded') ? '▼' : '▲';
-            });
-            
-            // Función para enviar mensaje
-            function sendMessage() {
-                const message = chatInput.value.trim();
-                if (message === '') return;
-                
-                // Añadir mensaje del usuario
-                addMessage(message, 'user-message');
-                chatInput.value = '';
-                
-                // Procesar respuesta del agente (con un pequeño retraso para simular "pensamiento")
-                setTimeout(() => {
-                    const response = getResponse(message);
-                    addMessage(response, 'agent-message');
-                }, 500);
-            }
-            
-            // Evento de clic en botón de enviar
-            sendButton.addEventListener('click', sendMessage);
-            
-            // Evento de presionar Enter en el input
-            chatInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    sendMessage();
-                }
-            });
-            
-            // Función para añadir mensaje al chat
-            function addMessage(text, className) {
-                const messageDiv = document.createElement('div');
-                messageDiv.classList.add('message', className);
-                messageDiv.textContent = text;
-                chatMessages.appendChild(messageDiv);
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-                
-                // Si el chat está colapsado y llega un mensaje del agente, expandirlo
-                if (className === 'agent-message' && !chatContainer.classList.contains('expanded')) {
-                    chatContainer.classList.add('expanded');
-                    toggleIcon.textContent = '▼';
-                }
-            }
-            
-            // Función para obtener respuesta del agente
-            function getResponse(message) {
-                // Convertir mensaje a minúsculas para búsqueda
-                const lowerMessage = message.toLowerCase();
-                
-                // Buscar palabras clave en la base de conocimientos
-                for (const keyword in knowledgeBase) {
-                    if (lowerMessage.includes(keyword)) {
-                        return knowledgeBase[keyword];
-                    }
-                }
-                
-                // Respuestas alternativas basadas en intención detectada
-                if (lowerMessage.includes('gracias') || lowerMessage.includes('gracie')) {
-                    return '¡De nada! Estoy aquí para ayudarte. ¿Hay algo más en lo que pueda asistirte?';
-                }
-                
-                if (lowerMessage.includes('adiós') || lowerMessage.includes('hasta luego') || lowerMessage.includes('chau')) {
-                    return '¡Hasta pronto! Si necesitas más información sobre cómo exponer tu pasión, estaré aquí para ayudarte.';
-                }
-                
-                // Detectar preguntas
-                if (lowerMessage.includes('?') || 
-                    lowerMessage.includes('qué') || 
-                    lowerMessage.includes('cómo') || 
-                    lowerMessage.includes('dónde') || 
-                    lowerMessage.includes('cuándo') || 
-                    lowerMessage.includes('por qué')) {
-                    return 'Buena pregunta. En ExPa nos especializamos en ayudar a personas como tú a mostrar su pasión al mundo. Para obtener información más detallada sobre eso, te recomendaría que nos contactes directamente o explores las secciones relevantes de nuestro sitio web.';
-                }
-                
-                // Respuesta por defecto
-                return 'Gracias por tu mensaje. En ExPa estamos comprometidos a ayudarte a compartir tu pasión con el mundo. Si tienes alguna pregunta específica sobre nuestros servicios o necesitas más información, no dudes en preguntar.';
-            }
-            
-            // Mostrar mensaje de bienvenida después de un breve retraso
-            setTimeout(() => {
-                if (!chatContainer.classList.contains('expanded')) {
-                    addMessage('¡Hola! ¿Te gustaría saber cómo podemos ayudarte a mostrar tu pasión al mundo? Estoy aquí para asistirte.', 'agent-message');
-                }
-            }, 3000);
-        });
-    </script>
-</body>
-</html>
+            <d
